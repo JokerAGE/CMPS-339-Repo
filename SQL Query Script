@@ -1,0 +1,44 @@
+CREATE DATABASE CMPS339db;
+
+CREATE TABLE Customer(
+CustomerID int NOT NULL AUTO_INCREMENT,
+FirstName varchar(50) NOT NULL,
+LastName varchar(50) NOT NULL,
+Address varchar(100) NOT NULL, 
+PRIMARY KEY (CustomerID)
+);
+
+CREATE TABLE Orders(
+OrderID int NOT NULL AUTO_INCREMENT,
+CustomerID int NOT NULL, 
+ProductID int NOT NULL,
+Amount int NOT NULL,
+ShippingAddress varchar(100) NOT NULL,
+PRIMARY KEY (OrderID),
+FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
+CREATE TABLE Product(
+ProductID int NOT NULL AUTO_INCREMENT,
+ProductName varchar(50) NOT NULL,
+ProductSize varchar(50) NOT NULL,
+PRIMARY KEY (ProductID)
+);
+
+DROP DATABASE CMPS339db;
+
+INSERT INTO Customer (FirstName, LastName, Address)
+VALUES ('Ismael', 'Reyes', '123 Sesame Street');
+
+INSERT INTO Orders (CustomerID, ProductID, Amount)
+VALUES ('1', '1', '2');
+
+INSERT INTO Product (ProductName, ProductSize)
+VALUES ('Frappucino', 'Large');
+
+DELETE FROM Customer WHERE FirstName='Ismael';
+
+DELETE FROM Orders WHERE CustomerID='1';
+
+DELETE FROM Product WHERE ProductName='Frappucino';
