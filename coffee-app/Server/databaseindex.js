@@ -50,6 +50,34 @@ app.post("/login", (req, res) => {
         );
     });
 
+    app.post("/addProduct", (req, res)=> {
+
+        const ProductName = req.body.ProductName;
+        const ProductSize = req.body.ProductSize;
+        
+            db.query("INSERT INTO Product (ProductName, ProductSize) VALUES (?,?)",
+            [ProductName, ProductSize],
+            (err, result) => {
+                console.log(err);
+            }
+            );
+        });
+
+        app.post("/sumbitOrders", (req, res)=> {
+
+             const CustomerID = req.body.CustomerID;
+            const ProductID = req.body.ProductID;
+           const Amount = req.body.Amount;
+            const ShippingAddress = req.body.ShippingAddress;
+            
+                db.query("INSERT INTO Orders (CustomerID, ProductID, Amount, ShippingAddress) VALUES (?,?,?,?)",
+                [CustomerID, ProductID, Amount, ShippingAddress],
+                (err, result) => {
+                    console.log(err);
+                }
+                );
+            });
+
 app.listen(3001, () => {
     console.log("running server");
 });
