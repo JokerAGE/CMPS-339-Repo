@@ -26,6 +26,8 @@ const [shippingAddress, setShippingAddress] = useState("");
 const [itemNumber, setItemNumber] = useState("");
 const [customerID, setCustmerID] = useState("");
 
+const [orderID, setOrderID] = useState("");
+
 const register = () => {
   Axios.post("http://localhost:3001/register", {
     FirstName: firstNameReg,
@@ -61,6 +63,14 @@ const submitOrders = () => {
     ProductID: itemNumber,
     CustomerID: customerID,
     ShippingAddress: shippingAddress,
+}).then((response) => {
+  console.log(response);
+  });
+};
+
+const deletePartOfOrder = () => {
+  Axios.delete("http://localhost:3001/deletePartOfOrder", {
+   OrderID: orderID,
 }).then((response) => {
   console.log(response);
   });
@@ -157,6 +167,19 @@ const submitOrders = () => {
         />
         <button onClick={submitOrders}> Submit </button>
       </div>
+      <div className="deletePartOfOrder">
+        <h1>Delete Your Order Identifer</h1>
+        <small>This will delete part of your order based on the ID of your order.</small>
+         <h3>
+           <label>Order ID Number</label>
+        <input type="text"
+        onChange={(e) => {
+          setOrderID(e.target.value);
+        }} 
+        />
+        <button onClick={deletePartOfOrder}> Delete </button>
+        </h3>
+        </div>
     </div>
   );
 }
