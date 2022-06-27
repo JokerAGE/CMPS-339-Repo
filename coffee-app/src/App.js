@@ -2,6 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import  Axios  from 'axios';
 import React, {useState} from 'react';
+import Home from './Home';
+import CreateOrder from './CreateOrder';
+import {Route, Link} from "react-router-dom";
+import Navbar from './Navbar';
+
 
 
 
@@ -37,6 +42,13 @@ const login = () => {
 
   return (
     <div className="App">
+
+      
+        <Home />
+      
+     
+    
+    
       <div className="registration">
         <h1>Registration</h1>
         <label>First Name</label>
@@ -80,5 +92,6 @@ const login = () => {
     </div>
   );
 }
+
 
 export default App;
