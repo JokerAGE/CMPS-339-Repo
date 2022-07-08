@@ -2,184 +2,35 @@ import logo from './logo.svg';
 import './App.css';
 import  Axios  from 'axios';
 import React, {useState} from 'react';
-import {Route, Link} from "react-router-dom";
-
-
-
-
+import {Route, Routes} from "react-router-dom";
+import Navbar from "./Navbar";
+import Home from "./pages/Home";
+import Registration from './pages/Registration';
+import Login from './pages/Login';
+import AddProduct from './pages/AddProduct';
+import SubmitOrder from './pages/SubmitOrder';
+import DeleteOrder from './pages/DeleteOrder';
 
 function App() {
 
-const [firstNameReg, setFirstNameReg] = useState("");
-const [lastNameReg, setLastNameReg] = useState("");
-const [addressReg, setAddressReg] = useState("");
-
-const [firstName, setFirstName] = useState("");
-const [lastName, setLastName] = useState("");
-const [address, setAddress] = useState("");
-
-const [productName, setProductName] = useState("");
-const [productSize, setProductSize] = useState("");
-
-const [amount, setAmount] = useState("");
-const [shippingAddress, setShippingAddress] = useState("");
-const [itemNumber, setItemNumber] = useState("");
-const [customerID, setCustmerID] = useState("");
-
-const [orderID, setOrderID] = useState("");
-
-const register = () => {
-  Axios.post("http://localhost:3001/register", {
-    FirstName: firstNameReg,
-    LastName: lastNameReg,
-    Address: addressReg,
-}).then((response) => {
-  console.log(response);
-  });
-};
-
-const login = () => {
-  Axios.post("http://localhost:3001/login", {
-    FirstName: firstName,
-    LastName: lastName,
-    Address: address,
-}).then((response) => {
-  console.log(response);
-  });
-};
-
-const addProduct = () => {
-  Axios.post("http://localhost:3001/addProduct", {
-    ProductName: productName,
-    ProductSize: productSize,
-}).then((response) => {
-  console.log(response);
-  });
-};
-
-const submitOrders = () => {
-  Axios.post("http://localhost:3001/sumbitOrders", {
-    Amount: amount,
-    ProductID: itemNumber,
-    CustomerID: customerID,
-    ShippingAddress: shippingAddress,
-}).then((response) => {
-  console.log(response);
-  });
-};
-
-const deletePartOfOrder = () => {
-  Axios.delete("http://localhost:3001/deletePartOfOrder", {
-   OrderID: orderID,
-}).then((response) => {
-  console.log(response);
-  });
-};
-
   return (
+
     <div className="App">
 
-    
-      <div className="registration">
-        <h1>Registration</h1>
-        <label>First Name</label>
-        <input type="text"
-        onChange={(e) => {
-          setFirstNameReg(e.target.value);
-        }} 
-        />
-        <label>Last Name</label>
-        <input type="text"
-        onChange={(e) => {
-          setLastNameReg(e.target.value);
-        }} 
-        />
-        <label>Address</label>
-        <input type="text" 
-        onChange={(e) => {
-          setAddressReg(e.target.value);
-        }} 
-        />
-        <button onClick={register}> Register </button>
-      </div>
+    <Navbar />
 
-      <div className="logIn">
-        <h1>Login</h1>
-        <input 
-        type="text" 
-        placeholder="First Name..." 
-        onChange={(e) => {
-          setFirstName(e.target.value);
-        }}
-        />
-        <input 
-        type="text" 
-        placeholder="Last Name..." 
-        onChange={(e) => {
-          setLastName(e.target.value);
-        }}
-        />
-        <button onClick={login}> Login </button>
-      </div>
+    <div className= "container">
+      <Routes>
+       <Route path="/" element={ <Home />} />
+       <Route path="/registration" element={ <Registration />} />
+       <Route path="/logins" element={ <Login />} />
+       <Route path="/add" element={ <AddProduct />} />
+       <Route path="/sumbit" element={ <SubmitOrder />} />
+       <Route path="/delete" element={ <DeleteOrder />} />    
+      </Routes>
 
-      <div className="addToOrder">
-        <h1>Add Products</h1>
-        <label>Product Name</label>
-        <input type="text"
-        onChange={(e) => {
-          setProductName(e.target.value);
-        }} 
-        />
-        <label>Product Size</label>
-        <input type="text"
-        onChange={(e) => {
-          setProductSize(e.target.value);
-        }} 
-        />
-        <button onClick={addProduct}> Add </button>
-        </div>
+    </div>
         
-      <div className="createOrder">
-        <h1>Submit your Order</h1>
-        <label>Amount</label>
-        <input type="text"
-        onChange={(e) => {
-          setAmount(e.target.value);
-        }} 
-        />
-        <label>Shipping Address</label>
-        <input type="text"
-        onChange={(e) => {
-          setShippingAddress(e.target.value);
-        }} 
-        />
-        <label>Item Number</label>
-        <input type="text"
-        onChange={(e) => {
-          setItemNumber(e.target.value);
-        }} 
-        />
-        <label>Customer Identification</label>
-        <input type="text"
-        onChange={(e) => {
-          setCustmerID(e.target.value);
-        }} 
-        />
-        <button onClick={submitOrders}> Submit </button>
-      </div>
-      <div className="deletePartOfOrder">
-        <h1>Delete Your Order Identifer</h1>
-        <small>This will delete part of your order based on the ID of your order.</small>
-         <h3>
-           <label>Order ID Number</label>
-        <input type="text"
-        onChange={(e) => {
-          setOrderID(e.target.value);
-        }} 
-        />
-        <button onClick={deletePartOfOrder}> Delete </button>
-        </h3>
-        </div>
     </div>
   );
 }

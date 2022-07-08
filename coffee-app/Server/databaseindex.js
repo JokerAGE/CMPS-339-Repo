@@ -79,24 +79,16 @@ app.post("/login", (req, res) => {
             });
 
             app.delete("/deletePartOfOrder", (req, res)=> {
-                
+
                 const OrderID = req.body.OrderID;
 
                 db.query("DELETE FROM Orders WHERE OrderID = ?",
                 [OrderID],
-        (err, result) => {
-
-            if(err) {
-            res.send({err: err})
-            }
-
-            if(result){
-                res.send(result);
-            } else {
-                res.send({message: "Incorrect credentials"});
-            }
-        }
+                (err, result) => {
+                    console.log(err);
+                }
                 );
+                
             });
 
 app.listen(3001, () => {
