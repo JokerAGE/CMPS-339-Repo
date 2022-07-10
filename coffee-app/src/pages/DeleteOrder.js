@@ -3,28 +3,28 @@ import React, {useState} from 'react';
 
 export default function DeleteOrder() {
 
-    const [orderID, setOrderID] = useState("");
+    const [customerID, setCustomerID] = useState("");
 
-    const deletePartOfOrder = () => {
-        Axios.delete("http://localhost:3001/deletePartOfOrder", {
-         OrderID: orderID,
+    const deleteAllOfOrders = () => {
+        Axios.delete("http://localhost:3001/deleteAllOrder", {
+         CustomerID: customerID,
       }).then((response) => {
         console.log(response);
         });
       };
 
 
-    return <div className="deletePartOfOrder">
-        <h1>Delete Your Order Identifer</h1>
-        <small>This will delete part of your order based on the ID of your order.</small>
+    return <div className="deleteAllOrders">
+        <h1>Delete all of your Orders</h1>
+        <small>This will delete part of your order based on your customer ID.</small>
          <h3>
-           <label>Order ID Number</label>
+           <label>Customer ID Number</label>
         <input type="text"
         onChange={(e) => {
-          setOrderID(e.target.value);
+          setCustomerID(e.target.value);
         }} 
         />
-        <button onClick={deletePartOfOrder}> Delete </button>
+        <button onClick={deleteAllOfOrders}> Delete </button>
         </h3>
         </div> 
 }

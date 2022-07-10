@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 export default function AddProduct() {
 
     const [productName, setProductName] = useState("");
-const [productSize, setProductSize] = useState("");
+    const [productSize, setProductSize] = useState("");
 
 const addProduct = () => {
     Axios.post("http://localhost:3001/addProduct", {
@@ -18,18 +18,22 @@ const addProduct = () => {
 
     return <div className="addToOrder">
     <h1>Add Products</h1>
+    <h4>
     <label>Product Name</label>
     <input type="text"
     onChange={(e) => {
       setProductName(e.target.value);
     }} 
     />
+    </h4>
+    <h4>
     <label>Product Size</label>
     <input type="text"
     onChange={(e) => {
       setProductSize(e.target.value);
     }} 
     />
+    </h4>
     <button onClick={addProduct}> Add </button>
     </div>
 }

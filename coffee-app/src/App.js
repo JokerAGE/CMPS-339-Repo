@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import AddProduct from './pages/AddProduct';
 import SubmitOrder from './pages/SubmitOrder';
 import DeleteOrder from './pages/DeleteOrder';
+import ViewOrders from './pages/ViewOrders';
+import ViewCustomers from './pages/ViewCustomers';
 
 function App() {
 
@@ -26,7 +28,9 @@ function App() {
        <Route path="/logins" element={ <Login />} />
        <Route path="/add" element={ <AddProduct />} />
        <Route path="/sumbit" element={ <SubmitOrder />} />
-       <Route path="/delete" element={ <DeleteOrder />} />    
+       <Route path="/delete" element={ <DeleteOrder />} />  
+       <Route path="/viewOrders" element={ <ViewOrders />} />
+       <Route path="/viewCustomers" element={ <ViewCustomers />} />  
       </Routes>
 
     </div>

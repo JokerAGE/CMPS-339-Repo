@@ -7,13 +7,21 @@ export default function Login() {
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
 
+    const[LogInStatus, setLoginStatus] = useState("");
+
     const login = () => {
         Axios.post("http://localhost:3001/login", {
           FirstName: firstName,
           LastName: lastName,
           Address: address,
       }).then((response) => {
-        console.log(response);
+
+        if(response.data.message) {
+          setLoginStatus(response.data.message);
+        } else {
+          setLoginStatus(response.data[0].FirstName);
+        }
+        
         });
       };
 
@@ -34,5 +42,7 @@ export default function Login() {
         }}
         />
         <button onClick={login}> Login </button>
+
+        <h1>{LogInStatus}</h1>
       </div>
 }

@@ -9,6 +9,9 @@ export default function Navbar() {
                 <a href="/logins">Login</a>
             </li>
             <li>
+                <a href="/viewOrders">All Orders</a>
+            </li>
+            <li>
                 <a href="/add">Add Product</a>
             </li>
             <li>
@@ -17,6 +20,10 @@ export default function Navbar() {
             <li>
                 <a href="/sumbit">Order</a>
             </li>
+            <li>
+                <a href="/viewCustomers">Customers</a>
+            </li>
+            
         </ul>
     </nav>
 }
