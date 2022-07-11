@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+const { response } = require("express");
 
 const app = express();
 
@@ -55,9 +56,10 @@ app.post("/login", (req, res) => {
 
         const ProductName = req.body.ProductName;
         const ProductSize = req.body.ProductSize;
+        const ProductPrice = req.body.ProductPrice;
         
-            db.query("INSERT INTO Product (ProductName, ProductSize) VALUES (?,?)",
-            [ProductName, ProductSize],
+            db.query("INSERT INTO Product (ProductName, ProductSize, ProductPrice) VALUES (?,?,?)",
+            [ProductName, ProductSize, ProductPrice],
             (err, result) => {
                 console.log(err);
             }
@@ -71,19 +73,20 @@ app.post("/login", (req, res) => {
             const Amount = req.body.Amount;
             const ShippingAddress = req.body.ShippingAddress;
             
-                db.query("INSERT INTO Orders (CustomerID, ProductID, Amount, ShippingAddress) VALUES (?,?,?,?)",
+                db.query("INSERT INTO CoffeeOrders (CustomerID, ProductID, Amount, ShippingAddress) VALUES (?,?,?,?)",
                 [CustomerID, ProductID, Amount, ShippingAddress],
                 (err, result) => {
                     console.log(err);
                 }
                 );
+
             });
 
             app.delete("/deleteAllOrder", (req, res)=> {
 
                 const CustomerID = req.body.CustomerID;
 
-                db.query("DELETE FROM Orders WHERE CustomerID='?'",
+                db.query("DELETE FROM CoffeeOrders WHERE CustomerID = ?",
                 [CustomerID],
                 (err, result) => {
                     console.log(err);
@@ -92,16 +95,52 @@ app.post("/login", (req, res) => {
                 
             });
 
-            app.get("/api/viewAllOrders", (req, res)=>{
-                const sqlSelect = "SELECT * FROM Orders";
+            app.get("/viewAllCustomerOrders", (req, res)=>{
+                const sqlSelect = "SELECT * FROM CoffeeOrders";
                 db.query(sqlSelect, (err, result) => {
-                    res.send(result);
+                    res.send(result.data);
                 });
             });
 
             app.get("/viewCustomers", (req, res)=>{
                 const sqlSelect = "SELECT * FROM Customer";
                 db.query(sqlSelect, (err, result) => {
+                    res.send(result);
+                });
+            });
+
+            app.get("/viewMenu", (req, res)=>{
+                const sqlSelect = "SELECT * FROM Product";
+                db.query(sqlSelect, (err, result) => {
+                    res.send(result);
+                });
+            });
+
+            app.put("/updateCustomerOrders", (req, res)=> {
+                const OrderID = req.body.OrderID;
+                const CustomerID = req.body.CustomerID;
+                const ProductID = req.body.ProductID;
+                const Amount = req.body.Amount;
+                const ShippingAddress = req.body.ShippingAddress;
+
+                db.query("Update CoffeeOrders set ProductID = ?, Amount = ?, ShippingAddress = '?'  where CustomerID = ? AND OrderID = ?",
+                [CustomerID, ProductID, Amount, ShippingAddress, OrderID],
+                (err, result) => {
+                    if (err){
+                      console.log(err);
+                    }else{
+                      res.send(result);
+                    }
+                  }
+                );
+            });
+
+            app.get("/viewCarts", (req, res)=>{
+                const CustomerID = req.body.CustomerID;
+
+                db.query("SELECT * FROM CoffeeOrders WHERE CustomerID = ?",
+                [CustomerID],
+                (err, result) => {
                     res.send(result);
                 });
             });

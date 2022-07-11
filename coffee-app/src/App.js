@@ -12,6 +12,9 @@ import SubmitOrder from './pages/SubmitOrder';
 import DeleteOrder from './pages/DeleteOrder';
 import ViewOrders from './pages/ViewOrders';
 import ViewCustomers from './pages/ViewCustomers';
+import ViewProducts from './pages/ViewProducts';
+import UpdateOrders from './pages/UpdateOrders';
+import Cart from './pages/Cart';
 
 function App() {
 
@@ -30,7 +33,10 @@ function App() {
        <Route path="/sumbit" element={ <SubmitOrder />} />
        <Route path="/delete" element={ <DeleteOrder />} />  
        <Route path="/viewOrders" element={ <ViewOrders />} />
-       <Route path="/viewCustomers" element={ <ViewCustomers />} />  
+       <Route path="/viewCustomers" element={ <ViewCustomers />} /> 
+       <Route path="/menu" element={ <ViewProducts />} />
+       <Route path="/updateOrders" element={<UpdateOrders/>}  />
+       <Route path="/cart" element={<Cart/>}  />
       </Routes>
 
     </div>

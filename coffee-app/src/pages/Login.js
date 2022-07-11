@@ -19,7 +19,7 @@ export default function Login() {
         if(response.data.message) {
           setLoginStatus(response.data.message);
         } else {
-          setLoginStatus(response.data[0].FirstName);
+          setLoginStatus(response.data[0].FirstName + " is logged in.");
         }
         
         });

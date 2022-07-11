@@ -5,11 +5,13 @@ export default function AddProduct() {
 
     const [productName, setProductName] = useState("");
     const [productSize, setProductSize] = useState("");
+    const [productPrice, setProductPrice] = useState("");
 
 const addProduct = () => {
     Axios.post("http://localhost:3001/addProduct", {
       ProductName: productName,
       ProductSize: productSize,
+      ProductPrice: productPrice,
   }).then((response) => {
     console.log(response);
     });
@@ -31,6 +33,14 @@ const addProduct = () => {
     <input type="text"
     onChange={(e) => {
       setProductSize(e.target.value);
+    }} 
+    />
+    </h4>
+    <h4>
+    <label>Product Price</label>
+    <input type="text"
+    onChange={(e) => {
+      setProductPrice(e.target.value);
     }} 
     />
     </h4>

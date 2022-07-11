@@ -11,13 +11,13 @@ BillingAddress varchar(100) NOT NULL,
 PRIMARY KEY (CustomerID)
 );
 
-CREATE TABLE Orders(
+CREATE TABLE CoffeeOrders(
 OrderID int NOT NULL AUTO_INCREMENT,
 CustomerID int NOT NULL, 
 ProductID int NOT NULL,
 Amount int NOT NULL,
 ShippingAddress varchar(100) NOT NULL,
-OrderPrice int NOT NULL,
+OrderPrice decimal(5,2) NOT NULL,
 PRIMARY KEY (OrderID),
 FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
 FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
@@ -27,6 +27,10 @@ CREATE TABLE Product(
 ProductID int NOT NULL AUTO_INCREMENT,
 ProductName varchar(50) NOT NULL,
 ProductSize varchar(50) NOT NULL,
-ProductPrice int NOT NULL,
+ProductPrice DECIMAL(3,2) NOT NULL,
 PRIMARY KEY (ProductID)
 );
+
+SELECT OrderID, CustomerID, ProductID, ShippingAddress, ProductPrice, Amount, ((ProductPrice * Amount) * 1.1)  AS OrderPrice FROM CoffeeOrders;
+
+update Product set ProductPrice = (ProductPrice * 1.1);

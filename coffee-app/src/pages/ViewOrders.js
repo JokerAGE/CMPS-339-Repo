@@ -7,16 +7,20 @@ export default function ViewOrders(){
     const [customerID, setCustomerID] = useState("");
     const [amount, setAmount] = useState("");
     const [shippingAddress, setShippingAddress] = useState("");
-    const [itemNumber, setItemNumber] = useState("");
+    const [productID, setProductID] = useState("");
+    const [orderPrice, setOrderPrice] = useState("");
+    const [productPrice, setProductPrice] = useState("");
     const [orderList, setOrderList] = useState([]);
 
     const viewAllOrders = () => {
-        Axios.get("http://localhost:3001/api/viewAllOrders", {
+        Axios.get("http://localhost:3001/viewAllCustomerOrders", {
         OrderID: orderID,
          CustomerID: customerID,
          Amount: amount,
-         ProductID: itemNumber,
+         ProductID: productID,
          ShippingAddress: shippingAddress,
+         ProductPrice: productPrice,
+         OrderPrice: orderPrice,
       }).then((response) => {
         setOrderList(response.data);
         });
@@ -31,7 +35,7 @@ export default function ViewOrders(){
         </h3>
 
         {orderList.map((val)=> {
-          return <h6> Customer ID: {val.CustomerID} |  Product ID: {val.ProductID} | Amount: {val.Amount} | ShippingAddress: {val.ShippingAddress} |</h6>
+          return <h6> Order ID: {val.OrderID} | Customer ID: {val.CustomerID} |  Product ID: {val.ProductID} | Amount: {val.Amount} | ShippingAddress: {val.ShippingAddress} | Order Price: {val.OrderPrice}</h6>
             
        })}
 
